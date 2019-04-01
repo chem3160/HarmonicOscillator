@@ -4,28 +4,28 @@ import math
 from matplotlib import pyplot as plt
 
 
-h_bar = 1
+hbar = 1
 pi = np.pi
-def HO_Func(state, xgrid, k, mu):
+
+def HO_Func(K, m,  n, r):
     
-  w = np.sqrt(k/mu)
+  w = np.sqrt(K/m)
   psi = []
   herm_coeff = []
 
-  for i in range(state):
+  for i in range(n):
       herm_coeff.append(0)
   herm_coeff.append(1)
 
-  for x in xgrid:
-    psi.append(math.exp(-mu*w*x**2/(2*h_bar)) * hermval((mu*w/h_bar)**0.5 * x, herm_coeff))
+  for x in r:
+    psi.append(math.exp(-m*w*x**2/(2*hbar)) * hermval((m*w/hbar)**0.5 * x, herm_coeff))
   # normalization factor for the wavefunction:
-  psi = np.multiply(psi, 1 / (math.pow(2, state) * math.factorial(state))**0.5 * (mu*w/(pi*h_bar))**0.25)
+  psi = np.multiply(psi, 1 / (math.pow(2, n) * math.factorial(n))**0.5 * (m*w/(pi*hbar))**0.25)
 
       
   return psi
 
 x = np.linspace(-5,5,200)
-psi = HO_Func(3, x, 1, 1)
+psi = HO_Func(1, 1, 2, x)
 
 plt.plot(x, psi)
-plt.show()
